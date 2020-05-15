@@ -1,0 +1,19 @@
+{
+  "name": "get-slack-magic-link",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/get-slack-magic-link.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "bin/get-slack-magic-link.js",
+  "author": "Felix Rieseberg <felix@felixrieseberg.com>",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/felixrieseberg/get-slack-magic-link.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^3.0.4"
+  }
+}
