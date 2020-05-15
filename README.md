@@ -25,7 +25,7 @@ down by 250ms.
 ## Usage (Library)
 
 ```js
-const { getMagicLink } = require('get-slack-magic-link);
+const { getMagicLink } = require('get-slack-magic-link');
 
 async myFunction() {
   const magicLink = await getMagicLink(email, password, workspace);
