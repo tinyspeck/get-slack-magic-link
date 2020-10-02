@@ -27,7 +27,17 @@ async function main() {
     process.exit(-1);
   }
 
-  const magicLink = await getMagicLink(workspace, email, password, debug);
+  let magicLink;
+  try {
+    magicLink = await getMagicLink(workspace, email, password, debug);
+  } catch (e) {
+    console.error('Could not fetch magic link:', '\n', e);
+    process.exit(1);
+  }
+
+  if (!magicLink.startsWith('slack://')) {
+    throw new Error('Magic link does not start with slack://', magicLink);
+  }
 
   console.log(magicLink);
 }
