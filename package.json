@@ -9,11 +9,11 @@
   "bin": "bin/get-slack-magic-link.js",
   "author": "Felix Rieseberg <felix@felixrieseberg.com>",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/felixrieseberg/get-slack-magic-link.git"
+    "type": "git",
+    "url": "https://github.com/felixrieseberg/get-slack-magic-link.git"
   },
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^3.0.4"
+    "puppeteer": "^5.3.1"
   }
 }
