@@ -5,10 +5,13 @@ async function getMagicLink(workspace, email, password, debug) {
     headless: !debug,
     slowMo: debug ? 250 : 0
   });
+  const context = browser.defaultBrowserContext();
+  context.overridePermissions(`https://${workspace}.slack.com`, ['clipboard-read']);
   const page = await browser.newPage();
 
   await page.goto(`https://${workspace}.slack.com/ssb/signin_redirect/fallback`, { waitUntil: 'networkidle2' });
 
+  // log into form
   await page.click('input[type=email]');
   await page.type('input[type=email]', email);
 
@@ -20,13 +23,14 @@ async function getMagicLink(workspace, email, password, debug) {
     page.click('button[type=submit]')
   ]);
 
-  await page.waitForSelector('input[type=text]');
-
-  const result = await page.$eval('input[type=text]', el => el.value);
-
+  // click button to copy sign-in link to clipboard
+  await page.waitForSelector('button[type=button]', {visible: true});
+  await page.click('button[type=button]');
+  // fetch active text in clipboard
+  const copiedText = await page.evaluate(`(async () => await navigator.clipboard.readText())()`)
   await browser.close();
 
-  return result;
+  return copiedText;
 }
 
 module.exports = {
