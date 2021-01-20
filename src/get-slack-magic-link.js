@@ -3,13 +3,21 @@ const puppeteer = require('puppeteer');
 async function getMagicLink(workspace, email, password, debug) {
   const browser = await puppeteer.launch({
     headless: !debug,
-    slowMo: debug ? 250 : 0
+    slowMo: debug ? 50 : 0
   });
   const context = browser.defaultBrowserContext();
   context.overridePermissions(`https://${workspace}.slack.com`, ['clipboard-read']);
   const page = await browser.newPage();
 
   await page.goto(`https://${workspace}.slack.com/ssb/signin_redirect/fallback`, { waitUntil: 'networkidle2' });
+
+  try {
+    await page.waitForTimeout(5000);
+    await page.waitForSelector('#onetrust-accept-btn-handler');
+    await page.click('#onetrust-accept-btn-handler');
+  } catch (error) {
+    console.log("Cookie consent popup did not appear, continuing...");
+  }
 
   // log into form
   await page.click('input[type=email]');
