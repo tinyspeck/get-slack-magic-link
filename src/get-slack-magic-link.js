@@ -11,14 +11,6 @@ async function getMagicLink(workspace, email, password, debug) {
 
   await page.goto(`https://${workspace}.slack.com/ssb/signin_redirect/fallback`, { waitUntil: 'networkidle2' });
 
-  try {
-    await page.waitForTimeout(5000);
-    await page.waitForSelector('#onetrust-accept-btn-handler');
-    await page.click('#onetrust-accept-btn-handler');
-  } catch (error) {
-    console.log("Cookie consent popup did not appear, continuing...");
-  }
-
   // log into form
   await page.click('input[type=email]');
   await page.type('input[type=email]', email);
@@ -26,10 +18,7 @@ async function getMagicLink(workspace, email, password, debug) {
   await page.click('input[type=password]');
   await page.type('input[type=password]', password);
 
-  await Promise.all([
-    page.waitForNavigation(),
-    page.click('button[type=submit]')
-  ]);
+  await page.evaluate(`document.querySelector('#signin_btn').click()`);
 
   // click button to copy sign-in link to clipboard
   await page.waitForSelector('button[type=button]', {visible: true});
