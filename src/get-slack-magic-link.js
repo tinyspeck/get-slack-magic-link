@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 async function getMagicLink(workspace, email, password, debug) {
   const browser = await puppeteer.launch({
     headless: !debug,
-    slowMo: debug ? 50 : 0
+    slowMo: debug ? 250 : 0
   });
   const context = browser.defaultBrowserContext();
   context.overridePermissions(`https://${workspace}.slack.com`, ['clipboard-read']);
