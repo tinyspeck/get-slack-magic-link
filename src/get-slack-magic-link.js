@@ -18,10 +18,7 @@ async function getMagicLink(workspace, email, password, debug) {
   await page.click('input[type=password]');
   await page.type('input[type=password]', password);
 
-  await Promise.all([
-    page.waitForNavigation(),
-    page.click('button[type=submit]')
-  ]);
+  await page.evaluate(`document.querySelector('#signin_btn').click()`);
 
   // click button to copy sign-in link to clipboard
   await page.waitForSelector('button[type=button]', {visible: true});
