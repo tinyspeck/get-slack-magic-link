@@ -19,17 +19,17 @@ Debugging:
 }
 
 async function main() {
-  const { workspace, email, password, debug } = parseArguments()
+  const { workspace, email, password, otp, debug } = parseArguments()
 
   if (!workspace || !email || !password) {
-    console.log(`One or more parameters are missing.`);
+    console.log(`One or more mandatory parameters are missing.`);
     printHelp();
     process.exit(-1);
   }
 
   let magicLink;
   try {
-    magicLink = await getMagicLink(workspace, email, password, debug);
+    magicLink = await getMagicLink(workspace, email, password, otp, debug);
   } catch (e) {
     console.error('Could not fetch magic link:', '\n', e);
     process.exit(1);

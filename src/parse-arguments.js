@@ -15,10 +15,15 @@ function findArgument(name = '') {
 }
 
 function parseArguments() {
+    SLACK_EMAIL=    process.env.SLACK_EMAIL;
+    SLACK_PASSWORD= process.env.SLACK_PASSWORD;
+    SLACK_OTP=      process.env.SLACK_OTP;
+    SLACK_WORKSPACE=process.env.SLACK_WORKSPACE;
   const result = {
-    email: findArgument('--email') || findArgument('-e'),
-    password: findArgument('--password') || findArgument('-p'),
-    workspace: findArgument('--workspace') || findArgument('-w'),
+    email: findArgument('--email') || findArgument('-e') || SLACK_EMAIL,
+    password: findArgument('--password') || findArgument('-p') || SLACK_PASSWORD,
+    otp: findArgument('--otp') || findArgument('-o') || SLACK_OTP,
+    workspace: findArgument('--workspace') || findArgument('-w') || SLACK_WORKSPACE,
     debug: process.argv.includes('--debug')
   };
 
