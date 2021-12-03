@@ -1,13 +1,19 @@
 # get-slack-magic-link
 
-You got a username, password, and workspace for Slack. You want a magic link. This tool will get one for you
-by manually navigating to Slack and getting a magic link. It's using [puppeteer](https://github.com/puppeteer/puppeteer/) to perform the automation.
+You got a username, password, (optionnaly a One-Time-Password) and workspace for Slack. You want a magic link. This tool will get one for you
+by manually navigating to Slack, getting a magic link, and copying it to your clipboard.
+You then just have to give focus to the slack app and it will connect you to your workspace.
+
+It's using [puppeteer](https://github.com/puppeteer/puppeteer/) to perform the automation.
 
 ## Usage (Command Line)
 
-I recommend using this tool with npx. Passing `-q` to npx will
-suppress Chrome's download status and is optional.
+I recommend using this tool with [gopass](https://www.gopass.pw/) to provide password and OTP as environment variables.
 
+see `get-slack-magic-link.sh` for an example usage.
+
+
+You can also run this program with npx:
 ```
 npx -q get-slack-magic-link -e my@mail.com -p myPassword -w myWorkspace [-o otpToken]
 ```

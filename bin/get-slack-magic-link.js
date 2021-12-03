@@ -19,7 +19,11 @@ Debugging:
 }
 
 async function main() {
+  const clipboardy = require('clipboardy');
   const { workspace, email, password, otp, debug } = parseArguments()
+
+  clipboardy.writeSync('🦄');
+  console.info('INFO: Copied unicorn to clipboard');
 
   if (!workspace || !email || !password) {
     console.log(`One or more mandatory parameters are missing.`);
@@ -40,6 +44,8 @@ async function main() {
   }
 
   console.log(magicLink);
+  clipboardy.write(magicLink);
+  console.info('Copied magicLink to clipboard');
 }
 
 main();
