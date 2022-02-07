@@ -19,12 +19,12 @@ async function getMagicLink(workspace, email, password, otp, debug) {
 
   // Do we have to choose netween enterprise SSO or guest account ?
   // If yes, we choose guest account.
-  console.log("DEBUG: looking for SSO/Guest choice")
+  console.log("INFO: looking for SSO/Guest choice")
   try {
     await page.waitForSelector('a[data-clog-params="click_target=enterprise_member_guest_account_signin_link"]');
     await page.click('a[data-clog-params="click_target=enterprise_member_guest_account_signin_link"]');
   } catch (error) {
-    console.log("INFO: No SSO/Guest account choice")
+    console.log("INFO: No SSO/Guest account choice found")
   }
 
   // log into form
