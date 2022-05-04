@@ -1,6 +1,6 @@
 {
   "name": "get-slack-magic-link",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "",
   "main": "src/get-slack-magic-link.js",
   "scripts": {
@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^5.3.1"
+    "clipboardy": "^2.3.0",
+    "puppeteer": "^13.5.2"
   }
 }

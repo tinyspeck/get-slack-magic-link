@@ -19,17 +19,21 @@ Debugging:
 }
 
 async function main() {
-  const { workspace, email, password, debug } = parseArguments()
+  const clipboardy = require('clipboardy');
+  const { workspace, email, password, otp, debug } = parseArguments()
+
+  clipboardy.writeSync('🦄');
+  console.info('INFO: Copied unicorn to clipboard');
 
   if (!workspace || !email || !password) {
-    console.log(`One or more parameters are missing.`);
+    console.log(`One or more mandatory parameters are missing.`);
     printHelp();
     process.exit(-1);
   }
 
   let magicLink;
   try {
-    magicLink = await getMagicLink(workspace, email, password, debug);
+    magicLink = await getMagicLink(workspace, email, password, otp, debug);
   } catch (e) {
     console.error('Could not fetch magic link:', '\n', e);
     process.exit(1);
@@ -40,6 +44,8 @@ async function main() {
   }
 
   console.log(magicLink);
+  clipboardy.write(magicLink);
+  console.info('Copied magicLink to clipboard');
 }
 
 main();
